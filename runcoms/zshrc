@@ -12,3 +12,53 @@ fi
 
 # Customize to your needs...
 
+#scm_breeze
+
+if [[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
+    source "${HOME}/.scm_breeze/scm_breeze.sh"
+fi
+
+# fasd
+
+if command -v fasd >/dev/null 2>&1; then
+    eval "$(fasd --init auto)"
+fi
+
+# perlbrew
+
+if [[ -s "${HOME}/perl5/perlbrew/etc/bashrc" ]]; then
+    source "${HOME}/perl5/perlbrew/etc/bashrc"
+fi
+
+# rbenv
+
+if [[ -d "/usr/local/var/rbenv" ]]; then
+    export RBENV_ROOT=/usr/local/var/rbenv
+    eval "$(rbenv init -)"
+fi
+
+use_macports() {
+    typeset -gU path
+    path=(
+	/opt/local/{bin,sbin}
+	$path
+    )
+    export path
+}
+
+use_conda() {
+    if [[ -d "$HOME/anaconda/bin" ]]; then
+	export path=("${HOME}/anaconda/bin"
+	    $path)
+    else
+	echo "Anaconda installation not found!"
+	return 1
+    fi
+}
+
+use_epd() {
+    epd_env="$HOME/Library/Enthought/Canopy_64bit/User/bin/activate"
+    if [[ -f "$epd_env" ]]; then
+	source "$epd_env"
+    fi
+}

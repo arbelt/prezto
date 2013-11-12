@@ -40,11 +40,33 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
-# Set the list of directories that Zsh searches for programs.
+# Set the list of directories that Zsh searches for programs
+
 path=(
-  /usr/local/{bin,sbin}
-  $path
+    $HOME/bin
+    $HOME/.cabal/bin
+    /usr/local/{bin,sbin}
+    /opt/stata12
+    $path
 )
+
+mypaths=(
+    "$HOME/bin"
+    "$HOME/.cabal/bin"
+    "$HOME/scripts"
+    "/Applications/git-annex.app/Contents/MacOS"
+    "/opt/stata12"
+)
+
+for p in mypaths; do
+    if [[ -d "$p" ]]; then
+	path=(
+	    $p
+	    $path
+	)
+    fi
+done
+	    
 
 #
 # Less
