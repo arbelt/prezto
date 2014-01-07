@@ -43,30 +43,27 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs
 
 path=(
-    $HOME/bin
-    $HOME/.cabal/bin
     /usr/local/{bin,sbin}
-    /opt/stata12
     $path
 )
 
 mypaths=(
     "$HOME/bin"
     "$HOME/.cabal/bin"
+    "$HOME/.cask/bin"
     "$HOME/scripts"
     "/Applications/git-annex.app/Contents/MacOS"
     "/opt/stata12"
 )
 
-for p in mypaths; do
+for p in $mypaths; do
     if [[ -d "$p" ]]; then
 	path=(
-	    $p
+	    "$p"
 	    $path
 	)
     fi
 done
-	    
 
 #
 # Less
