@@ -47,6 +47,7 @@ path=(
     $path
 )
 
+typeset -gU mypaths
 mypaths=(
     "$HOME/bin"
     "$HOME/.cabal/bin"
