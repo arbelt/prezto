@@ -47,6 +47,24 @@ path=(
   $path
 )
 
+typeset -gU mypaths
+mypaths=(
+    "$HOME/bin"
+    "$HOME/.cabal/bin"
+    "$HOME/.cask/bin"
+    "$HOME/scripts"
+    "/Applications/git-annex.app/Contents/MacOS"
+    "/opt/stata12"
+)
+
+for p in $mypaths; do
+    if [[ -d "$p" ]]; then
+	path=(
+	    "$p"
+	    $path
+	)
+    fi
+done
 #
 # Less
 #
