@@ -24,6 +24,10 @@ if [[ "$(uname)" = "Darwin" ]]; then
     else
         eval "$(gpg-agent --daemon --write-env-file)"
     fi
+
+    unalias run-help
+    autoload run-help
+    HELPDIR=/usr/local/share/zsh/helpfiles
 else
     virtualenv_wrapper_init="/usr/bin/virtualenvwrapper.sh"
 fi
