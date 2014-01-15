@@ -33,6 +33,10 @@ fi
 # Paths
 #
 
+if [[ -x "/usr/libexec/path_helper" ]]; then
+    eval "$(/usr/libexec/path_helper -s)"
+fi
+
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 

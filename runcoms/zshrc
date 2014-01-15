@@ -59,6 +59,12 @@ if command -v npm >/dev/null 2>&1; then
     eval "$(npm completion)"
 fi
 
+# nvm
+
+if [[ -s "${HOME}/.nvm/nvm.sh" ]]; then
+    source "${HOME}/.nvm/nvm.sh"
+fi
+
 use_macports() {
     typeset -gU path
     path=(
