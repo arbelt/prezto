@@ -34,11 +34,6 @@ fi
 
 [[ -f "$virtualenv_wrapper_init" ]] && source "$virtualenv_wrapper_init"
 
-#scm_breeze
-
-if [[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
-    source "${HOME}/.scm_breeze/scm_breeze.sh"
-fi
 
 # fasd
 
@@ -52,12 +47,6 @@ if [[ -s "${HOME}/perl5/perlbrew/etc/bashrc" ]]; then
     source "${HOME}/perl5/perlbrew/etc/bashrc"
 fi
 
-# rbenv
-
-if [[ -d "/usr/local/var/rbenv" ]]; then
-    export RBENV_ROOT=/usr/local/var/rbenv
-    eval "$(rbenv init -)"
-fi
 
 if command -v npm >/dev/null 2>&1; then
     eval "$(npm completion)"
@@ -67,6 +56,30 @@ fi
 
 if [[ -s "${HOME}/.nvm/nvm.sh" ]]; then
     source "${HOME}/.nvm/nvm.sh"
+fi
+
+# rbenv
+
+USE_RVM=true
+
+if [[ -z "$USE_RVM" && -d "/usr/local/var/rbenv" ]]; then
+    export RBENV_ROOT=/usr/local/var/rbenv
+    eval "$(rbenv init -)"
+elif [[ -s "${HOME}/.rvm/scripts/rvm" ]]; then
+    source "${HOME}/.rvm/scripts/rvm"
+fi
+
+#scm_breeze
+
+if [[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
+    source "${HOME}/.scm_breeze/scm_breeze.sh"
+fi
+
+# taskwarrior
+
+
+if command -v taskd >/dev/null 2>&1; then
+    export TASKDDATA=~/server_data
 fi
 
 use_macports() {
@@ -101,3 +114,5 @@ use_epd() {
 	return 1
     fi
 }
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
