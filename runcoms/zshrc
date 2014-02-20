@@ -14,8 +14,8 @@ fi
 
 if [[ "$(uname)" = "Darwin" ]]; then
     # virtualenv setup
-    virtualenv_wrapper_init="/usr/local/bin/virtualenvwrapper.sh"
-    export WORKON_HOME="$HOME/Envs"
+    # virtualenv_wrapper_init="/usr/local/bin/virtualenvwrapper.sh"
+    # export WORKON_HOME="$HOME/Envs"
 
     # gpg-apent setup
     if [ -f "${HOME}/.gpg-agent-info" ]; then
@@ -29,11 +29,16 @@ if [[ "$(uname)" = "Darwin" ]]; then
     autoload run-help
     HELPDIR=/usr/local/share/zsh/helpfiles
 else
-    virtualenv_wrapper_init="/usr/bin/virtualenvwrapper.sh"
+    # virtualenv_wrapper_init="/usr/bin/virtualenvwrapper.sh"
 fi
 
-[[ -f "$virtualenv_wrapper_init" ]] && source "$virtualenv_wrapper_init"
+# [[ -f "$virtualenv_wrapper_init" ]] && source "$virtualenv_wrapper_init"
 
+command -v pyenv >/dev/null 2>&1 && USE_PYENV=1
+if [[ -n "$USE_PYENV" ]]; then
+    [ -d "/usr/local/opt/pyenv" ] && export PYENV_ROOT="/usr/local/opt/pyenv"
+    eval "$(pyenv init -)"
+fi
 
 # fasd
 
@@ -115,4 +120,3 @@ use_epd() {
     fi
 }
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
