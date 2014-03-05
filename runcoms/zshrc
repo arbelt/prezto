@@ -28,13 +28,19 @@ if [[ "$(uname)" = "Darwin" ]]; then
     unalias run-help
     autoload run-help
     HELPDIR=/usr/local/share/zsh/helpfiles
+
+    VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 else
     # virtualenv_wrapper_init="/usr/bin/virtualenvwrapper.sh"
 fi
 
 # [[ -f "$virtualenv_wrapper_init" ]] && source "$virtualenv_wrapper_init"
 
-
+command -v pyenv >/dev/null 2>&1 && USE_PYENV=1
+if [[ -n "$USE_PYENV" ]]; then
+    [ -d "/usr/local/opt/pyenv" ] && export PYENV_ROOT="/usr/local/opt/pyenv"
+    eval "$(pyenv init -)"
+fi
 
 # fasd
 
@@ -121,4 +127,3 @@ use_epd() {
     fi
 }
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
