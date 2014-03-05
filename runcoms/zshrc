@@ -28,6 +28,8 @@ if [[ "$(uname)" = "Darwin" ]]; then
     unalias run-help
     autoload run-help
     HELPDIR=/usr/local/share/zsh/helpfiles
+
+    VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 else
     # virtualenv_wrapper_init="/usr/bin/virtualenvwrapper.sh"
 fi
@@ -86,6 +88,9 @@ fi
 if command -v taskd >/dev/null 2>&1; then
     export TASKDDATA=~/server_data
 fi
+
+# Vagrant default provider
+
 
 use_macports() {
     typeset -gU path
