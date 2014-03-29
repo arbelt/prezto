@@ -29,12 +29,23 @@ if [[ "$(uname)" = "Darwin" ]]; then
     autoload run-help
     HELPDIR=/usr/local/share/zsh/helpfiles
 
-    VAGRANT_DEFAULT_PROVIDER=vmware_fusion
+    if [ -f "/usr/local/etc/xml/catalog" ]; then
+        export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
+    fi
+
+    export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 else
     # virtualenv_wrapper_init="/usr/bin/virtualenvwrapper.sh"
 fi
 
 # [[ -f "$virtualenv_wrapper_init" ]] && source "$virtualenv_wrapper_init"
+
+# emacs cask
+
+CASK_DIR="~/.cask"
+if [[ -d "${CASK_DIR}" ]]; then
+    export PATH="${CASK_DIR}:${PATH}"
+fi
 
 command -v pyenv >/dev/null 2>&1 && USE_PYENV=1
 if [[ -n "$USE_PYENV" ]]; then
