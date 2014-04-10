@@ -59,6 +59,7 @@ mypaths=(
     "$HOME/.cask/bin"
     "$HOME/scripts"
     "/Applications/git-annex.app/Contents/MacOS"
+    "/Applications/Racket v6.0/bin"
     "/opt/stata12"
 )
 

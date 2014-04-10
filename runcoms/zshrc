@@ -89,7 +89,7 @@ fi
 
 # rbenv
 
-USE_RVM=true
+# USE_RVM=true
 
 if [[ -z "$USE_RVM" && -d "/usr/local/var/rbenv" ]]; then
     export RBENV_ROOT=/usr/local/var/rbenv
