@@ -35,11 +35,6 @@ if [[ "$(uname)" = "Darwin" ]]; then
 
     export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 
-    # Use MacVim executable if available
-    MACVIM_VIM="/Applications/MacVim.app/Contents/MacOS/Vim"
-    if [[ -x "${MACVIM_VIM}" ]]; then
-        alias vim="${MACVIM_VIM}"
-    fi
 else
     # virtualenv_wrapper_init="/usr/bin/virtualenvwrapper.sh"
 fi
