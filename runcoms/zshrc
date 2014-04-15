@@ -140,3 +140,5 @@ use_epd() {
 }
 
 unalias rm
+hash mvim 2>/dev/null && alias vim='mvim -v'
+

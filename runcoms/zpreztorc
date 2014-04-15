@@ -23,6 +23,8 @@ zstyle ':prezto:load' zfunction 'zargs' 'zmv'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
+[[ "$(uname)" =~ /Darwin/ ]] && zstyle ':prezto:load' pmodule 'osx'
+
 zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
@@ -32,7 +34,10 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'prompt'
+  'prompt' \
+  'syntax-highlighting' \
+  'osx'
+
 
 #
 # Editor
