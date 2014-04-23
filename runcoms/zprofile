@@ -101,5 +101,3 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
-hash most 2>/dev/null && export PAGER='most'
-
