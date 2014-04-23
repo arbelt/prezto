@@ -35,6 +35,7 @@ fi
 
 if [[ -x "/usr/libexec/path_helper" ]]; then
     PATH=""
+    MANPATH=""
     eval "$(/usr/libexec/path_helper -s)"
 fi
 
