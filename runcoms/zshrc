@@ -147,5 +147,7 @@ use_epd() {
 unalias rm
 hash mvim 2>/dev/null && alias vim='mvim -v'
 
-unalias gr
-alias gr='noglob gr'
+if command gr >/dev/null 2>&1; then
+    unalias gr
+    alias gr='noglob gr'
+fi
