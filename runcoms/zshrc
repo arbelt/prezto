@@ -48,11 +48,21 @@ if [[ -d "${CASK_DIR}" ]]; then
     export PATH="${CASK_DIR}:${PATH}"
 fi
 
-command -v pyenv >/dev/null 2>&1 && USE_PYENV=1
-if [[ -n "$USE_PYENV" ]]; then
-    [ -d "/usr/local/opt/pyenv" ] && export PYENV_ROOT="/usr/local/opt/pyenv"
-    eval "$(pyenv init -)"
-fi
+local -U pyenv_root_candidates
+pyenv_root_candidates=(
+    "/usr/local/opt/pyenv"
+    "${HOME}/.pyenv"
+)
+
+unset PYENV_ROOT
+for dirname in $pyenv_root_candidates; do
+    if [[ -d "${dirname}" ]]; then
+        export PYENV_ROOT="${dirname}"
+        export PATH="${PYENV_ROOT}/bin:${PATH}"
+        hash pyenv 2>/dev/null && eval "$(pyenv init -)"
+        break
+    fi
+done
 
 # fasd
 
@@ -76,11 +86,6 @@ fi
 hash n 2>/dev/null && USE_N=1
 if [[ -z "$USE_N" && -s "${HOME}/.nvm/nvm.sh" ]]; then
     source "${HOME}/.nvm/nvm.sh"
-fi
-
-if command -v pyenv >/dev/null 2>&1; then 
-    [ -d "/usr/local/opt/pyenv" ] && export PYENV_ROOT="/usr/local/opt/pyenv"
-    eval "$(pyenv init -)"
 fi
 
 # rbenv
@@ -143,4 +148,7 @@ use_epd() {
 unalias rm
 hash mvim 2>/dev/null && alias vim='mvim -v'
 
+#if command gr >/dev/null 2>&1; then
+#    unalias gr
 alias jq='noglob jq'
+#fi
