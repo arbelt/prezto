@@ -70,7 +70,9 @@ if command -v fasd >/dev/null 2>&1; then
     eval "$(fasd --init auto)"
 fi
 
-# perlbrew
+#
+# PERL
+#
 
 if [[ -s "${HOME}/perl5/perlbrew/etc/bashrc" ]]; then
     source "${HOME}/perl5/perlbrew/etc/bashrc"
@@ -81,21 +83,28 @@ if command -v npm >/dev/null 2>&1; then
     eval "$(npm completion)"
 fi
 
-# nvm
+#
+# NODE
+#
+# Prefer `n' if available, otherwise use `nvm' if found.
+#
 
 hash n 2>/dev/null && USE_N=1
 if [[ -z "$USE_N" && -s "${HOME}/.nvm/nvm.sh" ]]; then
     source "${HOME}/.nvm/nvm.sh"
 fi
 
-#scm_breeze
+#
+# scm_breeze
+#
 
 if [[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
     source "${HOME}/.scm_breeze/scm_breeze.sh"
 fi
 
+#
 # taskwarrior
-
+#
 
 if command -v taskd >/dev/null 2>&1; then
     export TASKDDATA=~/server_data
