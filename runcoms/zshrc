@@ -48,21 +48,31 @@ if [[ -d "${CASK_DIR}" ]]; then
     export PATH="${CASK_DIR}:${PATH}"
 fi
 
-local -U pyenv_root_candidates
-pyenv_root_candidates=(
-    "/usr/local/opt/pyenv"
-    "${HOME}/.pyenv"
-)
+my_find_first_existing() {
+    for arg; do
+        [[ -e "$arg" ]] && echo "$arg" && break
+    done
+}
 
-unset PYENV_ROOT
-for dirname in $pyenv_root_candidates; do
-    if [[ -d "${dirname}" ]]; then
-        export PYENV_ROOT="${dirname}"
-        export PATH="${PYENV_ROOT}/bin:${PATH}"
-        hash pyenv 2>/dev/null && eval "$(pyenv init -)"
-        break
-    fi
-done
+my_pyenv_init() {
+    local -U pyenv_root_candidates
+    pyenv_root_candidates=(
+                           "/usr/local/opt/pyenv"
+                           "${HOME}/.pyenv"
+                           )
+
+    unset PYENV_ROOT
+    for dirname in $pyenv_root_candidates; do
+        if [[ -d "${dirname}" ]]; then
+            export PYENV_ROOT="${dirname}"
+            export PATH="${PYENV_ROOT}/bin:${PATH}"
+            hash pyenv 2>/dev/null && eval "$(pyenv init -)"
+            break
+        fi
+    done
+}
+
+my_pyenv_init
 
 # fasd
 
@@ -134,7 +144,7 @@ use_conda() {
 }
 
 use_epd() {
-    epd_env="$HOME/Library/Enthought/Canopy_64bit/User/bin/activate"
+    local epd_env="$HOME/Library/Enthought/Canopy_64bit/User/bin/activate"
     if [[ -f "$epd_env" ]]; then
 	source "$epd_env"
     else
@@ -148,5 +158,17 @@ hash mvim 2>/dev/null && alias vim='mvim -v'
 
 #if command gr >/dev/null 2>&1; then
 #    unalias gr
-alias jq='noglob jq'
 #fi
+
+alias jq='noglob jq'
+alias git='noglob git'
+
+use_fresh() {
+    local fresh_build_shell="${HOME}/.fresh/build/shell.sh"
+    if [[ -f "${fresh_build_shell}" ]]; then
+        source "${fresh_build_shell}"
+    fi
+}
+
+use_fresh
+
